@@ -7,6 +7,7 @@ namespace TestTask.Editable
 {
     public static class ClientPacketsHandler
     {
+        public static event Action ClientConnectedToServer;
         #region Packet Handlers
         public static void LoginDataReceived(Packet packet)
         {
@@ -22,6 +23,7 @@ namespace TestTask.Editable
         {
             Packet packet = new Packet(1);
             ClientManager.Instance.PacketSenderClient.SendToServer(packet);
+            ClientConnectedToServer?.Invoke();
         }
         #endregion
     }
